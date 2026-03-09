@@ -43,16 +43,34 @@ describe("Word Search Kata", () => {
             ["X", "H", "X", "X"],
             ["X", "X", "A", "X"],
             ["X", "X", "X", "N"],
-        ];
+        ]
 
-        const result = findWord(grid, "KHAN");
+        const result = findWord(grid, "KHAN")
 
         expect(result).toEqual([
             [0, 0],
             [1, 1],
             [2, 2],
             [3, 3]
-        ]);
-    });
+        ])
+
+    })
+    test("finds KHAN right to left", () => {
+        const grid = [
+            ["N", "A", "H", "K"],
+            ["X", "X", "X", "X"],
+            ["X", "X", "X", "X"],
+            ["X", "X", "X", "X"],
+        ];
+
+        const result = findWord(grid, "KHAN")
+
+        expect(result).toEqual([
+            [3, 0],
+            [2, 0],
+            [1, 0],
+            [0, 0]
+        ])
+    })
 
 })
