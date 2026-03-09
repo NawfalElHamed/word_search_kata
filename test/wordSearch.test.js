@@ -1,4 +1,4 @@
-const { findWord, inputToWordAndGrid } = require("../src/wordSearch")
+const { findWord, inputToWordAndGrid, findMultipleWords } = require("../src/wordSearch")
 
 describe("Word Search Kata", () => {
 
@@ -160,6 +160,34 @@ describe("Word Search Kata", () => {
                 ["B", "O", "N", "E", "S"],
                 ["K", "H", "A", "N", "X"],
                 ["K", "I", "R", "K", "X"]
+            ]
+        })
+    })
+
+    //same thing as findWord just this one support multiple words
+    test("finds multiple words in the grid", () => {
+
+        const grid = [
+            ["K", "H", "A", "N"],
+            ["B", "O", "N", "E"],
+        ]
+
+        const words = ["KHAN", "BONE"]
+
+        const result = findMultipleWords(grid, words)
+
+        expect(result).toEqual({
+            KHAN: [
+                [0, 0],
+                [1, 0],
+                [2, 0],
+                [3, 0]
+            ],
+            BONE: [
+                [0, 1],
+                [1, 1],
+                [2, 1],
+                [3, 1]
             ]
         })
     })
