@@ -89,6 +89,17 @@ function findWord(grid, word) {
             result = verticalSearch(grid, word, row, col, -1)
             if (result) return result;
 
+            // diagonal up to right search
+            ({ coordinates, found } = resetStates())
+            for (let w = 0; w < word.length; w++) {
+                if (grid[row - w]?.[col + w] !== word[w]) {
+                    found = false
+                    break;
+                }
+                coordinates.push([col + w, row - w]);
+            }
+            // all letters matched diagonally
+            if (found) return coordinates;
         }
     }
     return null;
