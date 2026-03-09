@@ -26,6 +26,28 @@ function horizontalSearch(grid, word, row, col, direction) {
     return null
 }
 
+function verticalSearch(grid, word, row, col, direction) {
+
+    let { coordinates, found } = resetStates()
+
+    for (let w = 0; w < word.length; w++) {
+
+        //direction = 1 left to right
+        //direction = -1 right to left
+        let directionRow = row + w * direction
+
+        if (grid[directionRow]?.[col] !== word[w]) {
+            found = false
+            break
+        }
+        coordinates.push([col, directionRow])
+    }
+
+    // all letters matched horizontally
+    if (found) return coordinates
+
+    return null
+}
 
 function findWord(grid, word) {
 
@@ -42,17 +64,8 @@ function findWord(grid, word) {
 
 
             //  vertical search
-            ({ coordinates, found } = resetStates())
-
-            for (let w = 0; w < word.length; w++) {
-                if (grid[row + w]?.[col] !== word[w]) {
-                    found = false
-                    break
-                }
-                coordinates.push([col, row + w])
-            }
-            // all letters matched vertically
-            if (found) return coordinates;
+            result = verticalSearch(grid, word, row, col, 1)
+            if (result) return result;
 
 
             // diagonal down-right search
@@ -73,16 +86,8 @@ function findWord(grid, word) {
             if (result) return result;
 
             //vertical search bot to top
-            ({ coordinates, found } = resetStates())
-            for (let w = 0; w < word.length; w++) {
-                if (grid[row - w]?.[col] !== word[w]) {
-                    found = false
-                    break
-                }
-                coordinates.push([col, row - w])
-            }
-            // all letters matched vertically
-            if (found) return coordinates;
+            result = verticalSearch(grid, word, row, col, -1)
+            if (result) return result;
 
         }
     }
