@@ -114,6 +114,9 @@ function findWord(grid, word) {
 
             result = diagonalSearch(grid, word, row, col, 1, -1)
             if (result) return result
+
+            result = diagonalSearch(grid, word, row, col, -1, -1)
+            if (result) return result
         }
     }
     // Word not found in the grid
