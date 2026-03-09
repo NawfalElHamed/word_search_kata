@@ -19,7 +19,7 @@ describe("Word Search Kata", () => {
         ])
     })
 
-    test("finds KHAN vertically", () => {
+    test("finds KHAN top to bottom", () => {
         const grid = [
             ["K", "H", "A", "E"],
             ["H", "H", "A", "E"],
@@ -37,7 +37,7 @@ describe("Word Search Kata", () => {
         ])
     })
 
-    test("finds KHAN diagonally down-right", () => {
+    test("finds KHAN diagonally down to right", () => {
         const grid = [
             ["K", "X", "X", "X"],
             ["X", "H", "X", "X"],
@@ -89,5 +89,23 @@ describe("Word Search Kata", () => {
             [0, 0]
         ])
     })
+    test("finds KHAN diagonally up to right", () => {
+        const grid = [
+            ["X", "X", "X", "N"],
+            ["X", "X", "A", "X"],
+            ["X", "H", "X", "X"],
+            ["K", "X", "X", "X"],
+        ];
+
+        const result = findWord(grid, "KHAN");
+
+        expect(result).toEqual([
+            [0, 3],
+            [1, 2],
+            [2, 1],
+            [3, 0]
+        ]);
+    });
+
 
 })
