@@ -4,6 +4,7 @@ describe("Word Search Kata", () => {
         const grid = [
             ["K", "H", "A", "N"],
             ["B", "O", "N", "E"],
+            ["T", "E", "S", "T"],
         ];
 
         const result = findWord(grid, "KHAN")
