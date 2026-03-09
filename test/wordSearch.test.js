@@ -37,4 +37,22 @@ describe("Word Search Kata", () => {
         ])
     })
 
+    test("finds KHAN diagonally down-right", () => {
+        const grid = [
+            ["K", "X", "X", "X"],
+            ["X", "H", "X", "X"],
+            ["X", "X", "A", "X"],
+            ["X", "X", "X", "N"],
+        ];
+
+        const result = findWord(grid, "KHAN");
+
+        expect(result).toEqual([
+            [0, 0],
+            [1, 1],
+            [2, 2],
+            [3, 3]
+        ]);
+    });
+
 })
