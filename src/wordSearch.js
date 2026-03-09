@@ -14,20 +14,16 @@ function findWord(grid, word) {
 
             for (let w = 0; w < word.length; w++) {
 
-                let letterInGrid = grid[row][col + w]
-                let letterInWord = word[w]
-
-                if (letterInGrid != letterInWord) {
-                    found = false;
+                if (grid[row][col + w] !== word[w]) {
+                    found = false
                     break
                 }
-
                 coordinates.push([col + w, row])
             }
 
             // all letters matched horizontally
 
-            if (found && coordinates.length === word.length) return coordinates
+            if (found) return coordinates
 
             //  vertical search
 
@@ -38,22 +34,15 @@ function findWord(grid, word) {
             for (let w = 0; w < word.length; w++) {
 
 
-                // using ?. to avoid crashing if we go out of bounds
-                let letterInGrid = grid[row + w]?.[col]
-
-
-                let letterInWord = word[w]
-
-                // letter doesn't match, stop here
-                if (letterInGrid != letterInWord) {
-                    found = false;
+                if (grid[row + w]?.[col] !== word[w]) {
+                    found = false
                     break
                 }
 
                 coordinates.push([col, row + w])
-                // all letters matched vertically
-                if (found && coordinates.length === word.length) return coordinates
             }
+            // all letters matched vertically
+            if (found) return coordinates
         }
     }
     return null;
