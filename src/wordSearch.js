@@ -1,3 +1,4 @@
+// Resets the search state
 function resetStates() {
     return {
         coordinates: [],
@@ -5,6 +6,7 @@ function resetStates() {
     }
 }
 
+//Searches the word horizontally
 function horizontalSearch(grid, word, row, col, direction) {
 
     let { coordinates, found } = resetStates()
@@ -26,14 +28,15 @@ function horizontalSearch(grid, word, row, col, direction) {
     return null
 }
 
+//Searches the word vertically
 function verticalSearch(grid, word, row, col, direction) {
 
     let { coordinates, found } = resetStates()
 
     for (let w = 0; w < word.length; w++) {
 
-        //direction = 1 left to right
-        //direction = -1 right to left
+        //direction = 1 up to bottom
+        //direction = -1 bottom to top
         let directionRow = row + w * direction
 
         if (grid[directionRow]?.[col] !== word[w]) {
@@ -41,6 +44,30 @@ function verticalSearch(grid, word, row, col, direction) {
             break
         }
         coordinates.push([col, directionRow])
+    }
+
+    // all letters matched horizontally
+    if (found) return coordinates
+
+    return null
+}
+
+//Searches the word diagonally
+function diagonalSearch(grid, word, row, col, rowDirection, colDirection) {
+
+    let { coordinates, found } = resetStates()
+
+    for (let w = 0; w < word.length; w++) {
+
+
+        let DirectionRow = row + w * rowDirection
+        let DirectionCol = col + w * colDirection
+
+        if (grid[DirectionRow]?.[DirectionCol] !== word[w]) {
+            found = false
+            break;
+        }
+        coordinates.push([DirectionCol, DirectionRow]);
     }
 
     // all letters matched horizontally
@@ -69,16 +96,8 @@ function findWord(grid, word) {
 
 
             // diagonal down-right search
-            ({ coordinates, found } = resetStates())
-            for (let w = 0; w < word.length; w++) {
-                if (grid[row + w]?.[col + w] !== word[w]) {
-                    found = false
-                    break;
-                }
-                coordinates.push([col + w, row + w]);
-            }
-            // all letters matched diagonally
-            if (found) return coordinates;
+            result = diagonalSearch(grid, word, row, col, 1, 1)
+            if (result) return result;
 
 
             // horizontal right-to-left search
@@ -90,18 +109,11 @@ function findWord(grid, word) {
             if (result) return result;
 
             // diagonal up to right search
-            ({ coordinates, found } = resetStates())
-            for (let w = 0; w < word.length; w++) {
-                if (grid[row - w]?.[col + w] !== word[w]) {
-                    found = false
-                    break;
-                }
-                coordinates.push([col + w, row - w]);
-            }
-            // all letters matched diagonally
-            if (found) return coordinates;
+            result = diagonalSearch(grid, word, row, col, -1, 1)
+            if (result) return result;
         }
     }
+    // Word not found in the grid
     return null;
 }
 

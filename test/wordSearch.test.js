@@ -2,6 +2,7 @@ const { findWord } = require("../src/wordSearch")
 
 describe("Word Search Kata", () => {
 
+
     test("finds KHAN left to right", () => {
         const grid = [
             ["K", "H", "A", "N"],
@@ -89,6 +90,7 @@ describe("Word Search Kata", () => {
             [0, 0]
         ])
     })
+    // diagonally from bottom - left to top - right
     test("finds KHAN diagonally up to right", () => {
         const grid = [
             ["X", "X", "X", "N"],
@@ -107,5 +109,23 @@ describe("Word Search Kata", () => {
         ]);
     });
 
+    // diagonally from top-right to bottom-left
+    test("finds KHAN diagonally down to left", () => {
+        const grid = [
+            ["X", "X", "X", "K"],
+            ["X", "X", "H", "X"],
+            ["X", "A", "X", "X"],
+            ["N", "X", "X", "X"],
+        ];
+
+        const result = findWord(grid, "KHAN");
+
+        expect(result).toEqual([
+            [3, 0],
+            [2, 1],
+            [1, 2],
+            [0, 3]
+        ]);
+    });
 
 })
