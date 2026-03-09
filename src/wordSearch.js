@@ -5,6 +5,27 @@ function resetStates() {
     }
 }
 
+function horizontalSearch(grid, word, row, col, direction) {
+
+    let { coordinates, found } = resetStates()
+    for (let w = 0; w < word.length; w++) {
+
+        //direction = 1 left to right
+        //direction = -1 right to left
+        let directionColum = col + w * direction
+        if (grid[row]?.[directionColum] !== word[w]) {
+            found = false
+            break
+        }
+        coordinates.push([directionColum, row])
+    }
+
+    // all letters matched horizontally
+    if (found) return coordinates
+
+    return null
+}
+
 
 function findWord(grid, word) {
 
@@ -19,23 +40,12 @@ function findWord(grid, word) {
 
             //try to match the word
 
-            for (let w = 0; w < word.length; w++) {
+            let result = horizontalSearch(grid, word, row, col, 1)
+            if (result) return result;
+                //  vertical search
 
-                if (grid[row][col + w] !== word[w]) {
-                    found = false
-                    break
-                }
-                coordinates.push([col + w, row])
-            }
-
-            // all letters matched horizontally
-
-            if (found) return coordinates;
-
-            //  vertical search
-
-            // reset and try again but going down this time
-            ({ coordinates, found } = resetStates())
+                // reset and try again but going down this time
+                ({ coordinates, found } = resetStates())
 
             for (let w = 0; w < word.length; w++) {
 
@@ -66,23 +76,10 @@ function findWord(grid, word) {
             if (found) return coordinates;
 
 
-                // horizontal right-to-left search
+            // horizontal right-to-left search
 
-                // reset and try again but going down this time
-                ({ coordinates, found } = resetStates())
-
-            for (let w = 0; w < word.length; w++) {
-
-                if (grid[row][col - w] !== word[w]) {
-                    found = false
-                    break
-                }
-                coordinates.push([col - w, row])
-            }
-
-            // all letters matched horizontally
-
-            if (found) return coordinates;
+            result = horizontalSearch(grid, word, row, col, -1)
+            if (result) return result;
         }
     }
     return null;
