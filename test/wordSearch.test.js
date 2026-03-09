@@ -163,5 +163,4 @@ describe("Word Search Kata", () => {
             ]
         })
     })
-
 })

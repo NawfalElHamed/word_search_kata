@@ -123,4 +123,21 @@ function findWord(grid, word) {
     return null;
 }
 
-module.exports = { findWord }
+function inputToWordAndGrid(input) {
+
+
+
+    const lines = input.trim().split("\n")
+    
+    const firstLine = lines[0]
+    const words = firstLine.trim().split(",")
+
+    const grid = []
+    for (let i = 1; i < lines.length; i++) {
+        const letters = lines[i].trim().split(",")
+        grid.push(letters)
+    }
+
+    return { words, grid }
+}
+module.exports = { findWord, inputToWordAndGrid }
