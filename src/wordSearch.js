@@ -63,7 +63,26 @@ function findWord(grid, word) {
                 coordinates.push([col + w, row + w]);
             }
             // all letters matched diagonally
-            if (found) return coordinates
+            if (found) return coordinates;
+
+
+                // horizontal right-to-left search
+
+                // reset and try again but going down this time
+                ({ coordinates, found } = resetStates())
+
+            for (let w = 0; w < word.length; w++) {
+
+                if (grid[row][col - w] !== word[w]) {
+                    found = false
+                    break
+                }
+                coordinates.push([col - w, row])
+            }
+
+            // all letters matched horizontally
+
+            if (found) return coordinates;
         }
     }
     return null;
