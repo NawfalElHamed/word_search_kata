@@ -128,16 +128,8 @@ function inputToWordAndGrid(input) {
 
 
     const lines = input.trim().split("\n")
-    
-    const firstLine = lines[0]
-    const words = firstLine.trim().split(",")
-
-    const grid = []
-    for (let i = 1; i < lines.length; i++) {
-        const letters = lines[i].trim().split(",")
-        grid.push(letters)
-    }
-
+    const words = lines[0].trim().split(",")
+    const grid = lines.slice(1).map(line => line.trim().split(","))
     return { words, grid }
 }
 module.exports = { findWord, inputToWordAndGrid }
