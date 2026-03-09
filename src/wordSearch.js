@@ -43,6 +43,23 @@ function findWord(grid, word) {
             }
             // all letters matched vertically
             if (found) return coordinates
+
+            // diagonal down-right search
+
+
+            coordinates = []
+            found = true
+
+            for (let w = 0; w < word.length; w++) {
+                if (grid[row + w]?.[col + w] !== word[w]) {
+                    found = false
+                    break;
+                }
+                coordinates.push([col + w, row + w])
+            }
+            
+            // all letters matched diagonally
+                if (found) return coordinates
         }
     }
     return null;
