@@ -72,5 +72,22 @@ describe("Word Search Kata", () => {
             [0, 0]
         ])
     })
+    test("finds KHAN bottom to top", () => {
+        const grid = [
+            ["N", "H", "A", "E"],
+            ["A", "H", "A", "E"],
+            ["H", "H", "A", "E"],
+            ["K", "H", "A", "E"],
+        ]
+
+        const result = findWord(grid, "KHAN")
+
+        expect(result).toEqual([
+            [0, 3],
+            [0, 2],
+            [0, 1],
+            [0, 0]
+        ])
+    })
 
 })
