@@ -124,12 +124,21 @@ function findWord(grid, word) {
 }
 
 function inputToWordAndGrid(input) {
-
-
-
     const lines = input.trim().split("\n")
     const words = lines[0].trim().split(",")
     const grid = lines.slice(1).map(line => line.trim().split(","))
     return { words, grid }
 }
-module.exports = { findWord, inputToWordAndGrid }
+
+// multiple words function uses findWord
+function findMultipleWords(grid, words) {
+    const results = {}
+
+    for (const word of words) {
+        results[word] = findWord(grid, word)
+    }
+
+    return results
+}
+
+module.exports = { findWord, inputToWordAndGrid, findMultipleWords }
