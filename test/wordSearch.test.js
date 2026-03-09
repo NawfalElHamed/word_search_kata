@@ -1,4 +1,4 @@
-const { findWord } = require("../src/wordSearch")
+const { findWord, inputToWordAndGrid } = require("../src/wordSearch")
 
 describe("Word Search Kata", () => {
 
@@ -134,16 +134,34 @@ describe("Word Search Kata", () => {
             ["X", "A", "X", "X"],
             ["X", "X", "H", "X"],
             ["X", "X", "X", "K"],
-        ];
+        ]
 
-        const result = findWord(grid, "KHAN");
+        const result = findWord(grid, "KHAN")
 
         expect(result).toEqual([
             [3, 3],
             [2, 2],
             [1, 1],
             [0, 0]
-        ]);
-    });
+        ])
+    })
+    test("parses the input into words and grid", () => {
+        const input = `
+            BONES,KHAN,KIRK
+            B,O,N,E,S
+            K,H,A,N,X
+            K,I,R,K,X`
+
+        const result = inputToWordAndGrid(input)
+
+        expect(result).toEqual({
+            words: ["BONES", "KHAN", "KIRK"],
+            grid: [
+                ["B", "O", "N", "E", "S"],
+                ["K", "H", "A", "N", "X"],
+                ["K", "I", "R", "K", "X"]
+            ]
+        })
+    })
 
 })
