@@ -72,7 +72,6 @@ function diagonalSearch(grid, word, row, col, rowDirection, colDirection) {
 function findWord(grid, word) {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
-      let { coordinates, found } = resetStates();
 
       // horizontal search
       let result = horizontalSearch(grid, word, row, col, 1);
@@ -127,6 +126,7 @@ function findMultipleWords(grid, words) {
   return results;
 }
 
+// formats the results for a single word
 function formatResults(results, words) {
   let output = "";
   for (let i = 0; i < words.length; i++) {
@@ -136,9 +136,17 @@ function formatResults(results, words) {
   return output.trim();
 }
 
+// combines all the previous functions to solve the full kata puzzle
+function solveWordSearch(input) {
+  const { words, grid } = inputToWordAndGrid(input);
+  const results = findMultipleWords(grid, words);
+  return formatResults(results, words);
+}
+
 module.exports = {
   findWord,
   inputToWordAndGrid,
   findMultipleWords,
   formatResults,
+  solveWordSearch,
 };
