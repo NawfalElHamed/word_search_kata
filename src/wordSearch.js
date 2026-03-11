@@ -53,14 +53,14 @@ function diagonalSearch(grid, word, row, col, rowDirection, colDirection) {
   let { coordinates, found } = resetStates();
 
   for (let w = 0; w < word.length; w++) {
-    let DirectionRow = row + w * rowDirection;
-    let DirectionCol = col + w * colDirection;
+    let directionRow = row + w * rowDirection;
+    let directionCol = col + w * colDirection;
 
-    if (grid[DirectionRow]?.[DirectionCol] !== word[w]) {
+    if (grid[directionRow]?.[directionCol] !== word[w]) {
       found = false;
       break;
     }
-    coordinates.push([DirectionCol, DirectionRow]);
+    coordinates.push([directionCol, directionRow]);
   }
 
   // all letters matched horizontally
@@ -72,7 +72,6 @@ function diagonalSearch(grid, word, row, col, rowDirection, colDirection) {
 function findWord(grid, word) {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
-
       // horizontal search
       let result = horizontalSearch(grid, word, row, col, 1);
       if (result) return result;
@@ -126,7 +125,7 @@ function findMultipleWords(grid, words) {
   return results;
 }
 
-// formats the results for a single word
+// formats the results for all found words
 function formatResults(results, words) {
   let output = "";
   for (let i = 0; i < words.length; i++) {
